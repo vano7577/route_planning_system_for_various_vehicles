@@ -1,4 +1,4 @@
-@startuml GD_1.0
+@startgantt GD_1.0
 title
 <font size=18 color=black>Програмний продукт для складання подорожей
 end title
@@ -49,4 +49,4 @@ right footer
     Київ-2023
 end footer
 
-@enduml
+@endgantt
