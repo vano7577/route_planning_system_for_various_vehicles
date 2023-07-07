@@ -1,0 +1,98 @@
+@startuml SD_1.0
+skinparam maxMessageSize 100
+left header
+    <font color=000 size=18><b>Package:</b> SD2_1.0
+end header
+
+legend top left
+    <b>ID:</b> UC_1
+    <b>Назва:</b> Придбання квитка
+    <b>Учасники:</b> Пасажир, Форма, Менеджер, БД, Квитки
+    <b>Результат:</b> Квиток пасажира
+endlegend
+
+actor "Пасажир" as user #LightYellow
+boundary "Форма\nобрання\nквитка" as form #LightYellow
+control "Менеджер\nпридбання\nквитка" as meneger #LightYellow
+database "База\nданих\nкомпанiї" as db  #LightYellow
+boundary "Форма\nоплати\nквитка" as form_pay #LightYellow
+entity "Iнформацiя\nпро\nпасажира" as user_info #LightYellow
+
+autonumber
+
+ref over user
+    SD1_1.0
+end ref
+
+activate user
+user->form: Обраний маршрут
+activate form
+form->meneger: Передати iнформацiю про маршрут (SD1_1.0)
+
+note over form, meneger
+    2 info:
+    тип транспорту
+    мiсце вiдбуття/прибуття
+    дата i час подорожi
+end note
+
+activate meneger
+meneger->db: Знайти квиток
+activate db
+
+create collections "Квитки маршрута" as tickets_of_route #LightYellow
+db-->tickets_of_route : create
+activate tickets_of_route
+tickets_of_route-->meneger: Список наявних квиткiв
+meneger-->form: Вiдобразити список наявних квиткiв
+form-->user: Список наявних квиткiв
+     
+user->form: Номер квитка
+form-> meneger: Номер квитка
+deactivate form
+meneger-->form: destroy
+destroy form
+meneger->tickets_of_route: Номер квитка
+
+create entity "Квиток" as ticket #LightYellow
+tickets_of_route-> ticket: create
+deactivate tickets_of_route
+activate ticket
+meneger->form_pay: Вiдкрити форму оплати 
+activate form_pay
+    
+user_info --> form_pay: Iнформацiя про пасажира
+activate user_info
+deactivate user_info
+ticket --> form_pay: Iнформацiя про квиток
+deactivate ticket
+form_pay --> user: "Введiть iнформацiю про карту оплати"
+user-> form_pay: Iнформацiя про карту оплати
+form_pay-->meneger : Iнформацiя про карту оплати, пасажира i квиток
+meneger->meneger: Оплата квитка
+activate meneger
+deactivate meneger
+
+opt payment successful
+    meneger->db: Зв'язати знайдений квиток з пасажиром
+
+    opt update successful
+        db-->meneger: "Оновлення успiшне"
+        deactivate db
+        meneger->form_pay: Вiдобразити iнформацiю квитка
+        deactivate meneger
+        form_pay-->user: Квиток пасажира
+        deactivate form_pay
+        deactivate user
+    end
+end
+
+
+right footer
+    Програмний продукт для складання подорожей.
+    Дiаграма послiдовностi.
+    НТУУ КПІ ім.І.Сікорського
+    Голубов Iван
+    Київ-2023
+end footer
+@enduml

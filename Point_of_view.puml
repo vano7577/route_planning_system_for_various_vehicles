@@ -1,0 +1,27 @@
+@startuml UC_2.1.1
+title
+<font size=18 color=black>Програмний продукт для складання подорожей
+end title
+
+usecase "Пасажир"  as User #White
+usecase "Адміністратор" as Admin #White
+usecase "Придбання квитка" as UC_1
+usecase "Перегляд доступних\nмаршрутів" as UC_2  
+usecase "Нарахування бонусів" as UC_1.1
+usecase "Списання бонусів" as UC_1.2
+usecase "Авторизація" as UC_3
+usecase "Перегляд\nквитка" as UC_4 
+usecase "Перегляд\nпридбаних квитків" as UC_5
+usecase "Перегляд продажів\nна маршрутах" as UC_6
+usecase "Створення і зміна\nмаршрутів" as UC_7
+usecase "Зміна\nзнижок" as UC_8
+
+right footer
+    Програмний продукт для складання подорожей.
+    Діаграма ідентифікації точок зору.
+    НТУУ КПІ ім.І.Сікорського
+    Голубов Iван
+    Київ-2023
+end footer
+
+@enduml

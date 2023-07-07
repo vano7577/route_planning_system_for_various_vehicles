@@ -1,0 +1,52 @@
+@startuml GD_1.0
+title
+<font size=18 color=black>Програмний продукт для складання подорожей
+end title
+Project starts 2023-09-01
+[T1] starts 2023-09-01
+[T7] starts 2023-09-01
+[T1] lasts 14 days
+[T7] lasts 2 days
+[M1] happens at [T1]'s end
+
+
+[M3] happens at [T7]'s end
+[T8] starts at [T7]'s end
+[T8] lasts 5 days
+[T9] starts at [T7]'s end
+[T9] lasts 5 days
+[T10] starts at [T7]'s end
+[T10] lasts 5 days
+[T11] starts at [T7]'s end
+[T11] lasts 5 days
+
+[T2] starts at [T1]'s end
+[T2] lasts 10 days
+[T3] starts at [T1]'s end
+[T3] lasts 10 days
+[T4] starts at [T1]'s end
+[T4] lasts 10 days
+[T5] starts at [T1]'s end
+[T5] lasts 5 days
+
+[M2] happens at [T2]'s end
+[T6] starts at [T2]'s end
+[T6] lasts 14 days
+
+[M4] happens at [T6]'s end
+[T12] starts at [M4]'s end
+[T12] lasts 2 days
+
+[M5] happens at [T12]'s end
+[T13] starts at [M5]'s end
+[T13] lasts 3 days
+[Кiнець] happens at [T13]'s end
+right footer
+    Програмний продукт для складання подорожей.
+    Дiаграма Ганта
+    НТУУ КПІ ім.І.Сікорського
+    Голубов Iван
+    Київ-2023
+end footer
+
+@enduml
