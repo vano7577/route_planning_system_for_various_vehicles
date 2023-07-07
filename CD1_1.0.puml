@@ -1,0 +1,37 @@
+@startuml CD_1.0
+skinparam maxMessageSize 100
+left header
+    <font color=000 size=18><b>Package:</b> CD1_1.0
+end header
+
+legend top left
+    <b>ID:</b> UC_2
+    <b>Назва:</b> Перегляд доступних маршрутів
+    <b>Учасники:</b> Пасажир, Форма, Менеджер, БД, Маршрути
+    <b>Результат:</b> Список маршрутiв
+endlegend
+
+actor "Пасажир" as user #LightYellow
+boundary "Форма\nпошуку\nмаршруту" as form #LightYellow
+control "Менеджер\nпошуку\nмаршрута" as meneger #LightYellow
+database "База\nданих\nкомпанiї" as db  #LightYellow
+
+user -> form: <b>1.</b> Обрати параметри маршруту 
+form -r-> meneger: <b>2.</b> Передати iнформацiю про параметри маршруту
+
+meneger->db: <b>3.</b> Знайти маршрути за вказаними параметрами
+
+db ->meneger: <b>4.</b> Список наявних маршрутiв
+
+meneger ->form: <b>5.</b> Вiдобразити список наявних квиткiв
+
+form ->user: <b>6.</b> Список наявних квиткiв
+
+right footer
+    Програмний продукт для складання подорожей.
+    Дiаграма послiдовностi.
+    НТУУ КПІ ім.І.Сікорського
+    Голубов Iван
+    Київ-2023
+end footer
+@enduml

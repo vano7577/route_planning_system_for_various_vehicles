@@ -1,0 +1,41 @@
+@startuml P1_1.0
+skinparam maxMessageSize 100
+left header
+    <font color=000 size=18><b>Package:</b> P1_1.0
+end header
+
+
+
+
+package boundaries #White {
+    boundary "Форма\nпошуку\nмаршруту" as form_find #LightYellow
+    boundary "Форма\nобрання\nквитка" as form_buy #LightYellow
+    boundary "Форма\nоплати\nквитка" as form_pay #LightYellow
+} 
+package controls #White {
+    control "Менеджер\nпридбання\nквитка" as meneger_buy #LightYellow
+    control "Менеджер\nпошуку\nмаршрута" as meneger_find #LightYellow
+}
+package databases #White {
+    database "База\nданих\nкомпанiї" as db  #LightYellow
+}
+package entities #White {
+    entity "Iнформацiя\nпро\nпасажира" as user_info #LightYellow
+    entity "Квиток" as ticket #LightYellow
+}
+package collections #White {
+    collections "Квитки маршрута" as tickets_of_route #LightYellow
+}
+boundaries ..> controls
+controls .u.> databases
+databases .u.> entities
+databases .u.> collections
+
+right footer
+    Програмний продукт для складання подорожей.
+    Дiаграма пакетiв.
+    НТУУ КПІ ім.І.Сікорського
+    Голубов Iван
+    Київ-2023
+end footer
+@enduml

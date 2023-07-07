@@ -1,0 +1,54 @@
+@startuml CD_1.0
+skinparam maxMessageSize 100
+left header
+    <font color=000 size=18><b>Package:</b> SD2_1.0
+end header
+
+legend top left
+    <b>ID:</b> UC_1
+    <b>Назва:</b> Придбання квитка
+    <b>Учасники:</b> Пасажир, Форма, Менеджер, БД, Квитки
+    <b>Результат:</b> Квиток пасажира
+endlegend
+
+actor "Пасажир" as user #LightYellow
+boundary "Форма\nобрання\nквитка" as form #LightYellow
+control "Менеджер\nпридбання\nквитка" as meneger #LightYellow
+database "База\nданих\nкомпанiї" as db  #LightYellow
+boundary "Форма\nоплати\nквитка" as form_pay #LightYellow
+entity "Iнформацiя\nпро\nпасажира" as user_info #LightYellow
+collections "Квитки маршрута" as tickets_of_route #LightYellow
+entity "Квиток" as ticket #LightYellow
+
+user-->form: <b>1.</b> Обраний маршрут
+form-->meneger: <b>2.</b> Передати iнформацiю про маршрут (SD1_1.0)
+meneger-->db: <b>3.</b> Знайти квиток
+db-->tickets_of_route : <b>4.</b> create
+tickets_of_route-->meneger: <b>5.</b> Список наявних квиткiв
+meneger-->form: <b>6.</b> Вiдобразити список наявних квиткiв
+form-->user: <b>7.</b> Список наявних квиткiв  
+user-->form: <b>8.</b> Номер квитка
+form--> meneger: <b>9.</b> Номер квитка
+meneger-->form: <b>10.</b> destroy
+meneger-->tickets_of_route: <b>11.</b> Номер квитка
+tickets_of_route--> ticket: <b>12.</b> create
+meneger-->form_pay: <b>13.</b> Вiдкрити форму оплати    
+user_info -u-> form_pay: <b>14.</b> Iнформацiя про пасажира
+ticket --> form_pay: <b>15.</b> Iнформацiя про квиток
+form_pay --> user: <b>16.</b> ''Введiть iнформацiю про карту оплати''
+user--> form_pay: <b>17.</b> Iнформацiя про карту оплати
+form_pay-->meneger: <b>18.</b> Iнформацiя про карту оплати, пасажира i квиток
+meneger-->meneger: <b>19.</b> Оплата квитка
+meneger-->db: <b>20.</b> Зв'язати знайдений квиток з пасажиром
+db-->meneger: <b>21.</b> ''Оновлення успiшне''
+meneger-->form_pay: <b>22.</b> Вiдобразити iнформацiю квитка
+form_pay-->user: <b>23.</b> Квиток пасажира
+
+right footer
+    Програмний продукт для складання подорожей.
+    Дiаграма послiдовностi.
+    НТУУ КПІ ім.І.Сікорського
+    Голубов Iван
+    Київ-2023
+end footer
+@enduml
